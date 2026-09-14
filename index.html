@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lombok — Pulau Seribu Masjid, Tanah Sasak</title>
+<meta name="description" content="Jelajahi Pulau Lombok: pantai, bukit, gunung, masjid bersejarah, mata pencaharian masyarakat Sasak, dan Sirkuit Mandalika dalam satu perjalanan interaktif.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lombok — Pulau Seribu Masjid, Tanah Sasak">
+<meta property="og:description" content="Jelajahi keindahan alam, budaya, dan denyut kehidupan Pulau Lombok secara interaktif.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1573790387438-4da905039392?w=1200&q=80">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================= TOKENS ============================= */
+:root{
+  --bg:#F4EFE3;
+  --bg-raised:#ECE4D2;
+  --surface:rgba(255,255,255,0.55);
+  --surface-strong:rgba(255,255,255,0.78);
+  --ink:#292722;
+  --ink-soft:#5C5848;
+  --ink-faint:#8B8672;
+  --line:rgba(41,39,34,0.14);
+  --ocean:#1E4A57;
+  --ocean-soft:#3D6E79;
+  --sage:#69795B;
+  --sage-soft:#8B9A7D;
+  --clay:#AB6A3A;
+  --clay-soft:#C68952;
+  --shadow: 0 30px 60px -35px rgba(20,25,20,0.35);
+  --radius-s:2px;
+  --radius-m:4px;
+  --serif:'Playfair Display', serif;
+  --sans:'Plus Jakarta Sans', sans-serif;
+  color-scheme: light;
+}
+html[data-theme="dark"]{
+  --bg:#181A16;
+  --bg-raised:#20221D;
+  --surface:rgba(255,255,255,0.045);
+  --surface-strong:rgba(255,255,255,0.08);
+  --ink:#EEE9D8;
+  --ink-soft:#B9B29B;
+  --ink-faint:#787260;
+  --line:rgba(255,255,255,0.12);
+  --ocean:#7FB2BE;
+  --ocean-soft:#5C8D96;
+  --sage:#A3B492;
+  --sage-soft:#7C8D6E;
+  --clay:#DB9A62;
+  --clay-soft:#B87A48;
+  --shadow: 0 30px 70px -30px rgba(0,0,0,0.6);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .5s ease, color .5s ease;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:.01em;}
+p{margin:0;}
+button{font-family:inherit;cursor:pointer;}
+.container{
+  width:100%;
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,48px);
+}
+::selection{background:var(--clay);color:#fff;}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+
+.eyebrow{
+  font-size:.72rem;
+  color:var(--sage);
+  font-weight:600;
+  letter-spacing:.06em;
+}
+.section-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:44px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--line);
+}
+.section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);}
+.section-head .lede{max-width:360px;color:var(--ink-soft);font-size:.95rem;}
+
+/* ============================= HEADER ============================= */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  padding:18px 0;
+  background:transparent;
+  transition:background .4s ease, padding .4s ease, box-shadow .4s ease, border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  padding:12px 0;
+  background:var(--surface-strong);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 10px 30px -20px rgba(0,0,0,0.25);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.logo{
+  font-family:var(--serif);
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+.logo span{
+  font-family:var(--sans);
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  color:var(--clay);
+  text-transform:none;
+}
+.main-nav{display:flex;align-items:center;gap:2px;}
+.main-nav a{
+  font-size:.85rem;
+  padding:9px 15px;
+  color:var(--ink-soft);
+  border-radius:var(--radius-m);
+  position:relative;
+  transition:color .25s ease;
+}
+.main-nav a:hover{color:var(--ink);}
+.main-nav a::after{
+  content:"";
+  position:absolute;
+  left:15px;right:15px;bottom:5px;
+  height:1px;
+  background:var(--clay);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s ease;
+}
+.main-nav a:hover::after{transform:scaleX(1);}
+
+.header-actions{display:flex;align-items:center;gap:14px;}
+
+.theme-toggle{
+  width:52px;height:28px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:var(--bg-raised);
+  position:relative;
+  padding:0;
+  flex-shrink:0;
+  transition:background .3s ease;
+}
+.theme-toggle .knob{
+  position:absolute;
+  top:2px;left:2px;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--ocean);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--bg);
+  transition:transform .35s cubic-bezier(.65,0,.35,1), background .3s ease;
+}
+html[data-theme="dark"] .theme-toggle .knob{transform:translateX(24px); background:var(--clay);}
+.theme-toggle .knob svg{width:13px;height:13px;}
+
+.hamburger{
+  display:none;
+  width:38px;height:38px;
+  border:none;background:none;
+  position:relative;
+  flex-shrink:0;
+}
+.hamburger span{
+  position:absolute;left:8px;right:8px;
+  height:1.5px;background:var(--ink);
+  transition:transform .3s ease, opacity .3s ease, top .3s ease;
+}
+.hamburger span:nth-child(1){top:14px;}
+.hamburger span:nth-child(2){top:19px;}
+.hamburger span:nth-child(3){top:24px;}
+.hamburger.open span:nth-child(1){top:19px;transform:rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){top:19px;transform:rotate(-45deg);}
+
+.mobile-nav{
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:99;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:32px;
+  transform:translateY(-100%);
+  transition:transform .45s cubic-bezier(.65,0,.35,1);
+}
+.mobile-nav.open{transform:translateY(0);}
+.mobile-nav a{
+  font-family:var(--serif);
+  font-size:2rem;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--ink);
+}
+
+/* ============================= HERO ============================= */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:clamp(50px,8vw,90px);
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(180deg, rgba(20,24,18,0.15) 0%, rgba(18,20,15,0.35) 55%, rgba(14,16,12,0.78) 100%),
+    url('https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=1800&q=80');
+  background-size:cover;
+  background-position:center 65%;
+  transform:scale(1.08);
+}
+html[data-theme="dark"] .hero-bg{
+  background-image:
+    linear-gradient(180deg, rgba(10,12,9,0.35) 0%, rgba(8,9,7,0.55) 55%, rgba(6,7,5,0.9) 100%),
+    url('https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=1800&q=80');
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:40px;
+  align-items:end;
+}
+.hero-tag{
+  color:#E9E2CC;
+  font-size:.75rem;
+  letter-spacing:.08em;
+  font-weight:600;
+  margin-bottom:18px;
+  opacity:0;
+}
+.hero h1{
+  font-size:clamp(2.6rem,6.4vw,5.1rem);
+  color:#FBF7EC;
+  line-height:1.02;
+  max-width:12ch;
+  opacity:0;
+}
+.hero h1 em{font-style:italic;color:var(--clay-soft);}
+.hero-desc{
+  color:#DCD5C0;
+  font-size:1.02rem;
+  max-width:46ch;
+  margin-top:22px;
+  opacity:0;
+}
+.hero-panel{
+  background:rgba(20,22,17,0.4);
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:var(--radius-m);
+  padding:26px 28px;
+  color:#F1ECDD;
+  opacity:0;
+}
+.hero-panel p{font-size:.88rem;line-height:1.65;color:#D7D0BB;}
+.hero-panel .quote-mark{font-family:var(--serif);font-size:2.4rem;color:var(--clay-soft);line-height:1;display:block;margin-bottom:6px;}
+
+.hero-anim.in .hero-tag,
+.hero-anim.in .hero h1,
+.hero-anim.in .hero-desc,
+.hero-anim.in .hero-panel{
+  animation:riseIn .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-anim.in .hero-tag{animation-delay:.05s;}
+.hero-anim.in .hero h1{animation-delay:.15s;}
+.hero-anim.in .hero-desc{animation-delay:.32s;}
+.hero-anim.in .hero-panel{animation-delay:.45s;}
+@keyframes riseIn{
+  from{opacity:0; transform:translateY(22px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ============================= STATS ============================= */
+.stats{
+  padding:70px 0;
+  border-bottom:1px solid var(--line);
+}
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+}
+.stat-card{
+  padding:8px 34px;
+  border-left:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.stat-card:first-child{border-left:none;padding-left:0;}
+.stat-num{
+  font-family:var(--serif);
+  font-size:clamp(2.1rem,4vw,3.1rem);
+  color:var(--ocean);
+  font-variant-numeric:tabular-nums;
+}
+.stat-label{font-size:.85rem;color:var(--ink-soft);max-width:26ch;}
+.stat-sub{font-size:.76rem;color:var(--ink-faint);}
+
+/* ============================= INTRO / ABOUT ============================= */
+.about{padding:96px 0;}
+.about-grid{
+  display:grid;
+  grid-template-columns:0.85fr 1.15fr;
+  gap:64px;
+  align-items:start;
+}
+.about-figure{
+  border-radius:var(--radius-m);
+  overflow:hidden;
+  position:sticky;
+  top:110px;
+}
+.about-figure img{width:100%;height:520px;object-fit:cover;}
+.about-copy p{
+  color:var(--ink-soft);
+  font-size:1.02rem;
+  max-width:62ch;
+  margin-bottom:20px;
+}
+.about-copy p:first-of-type::first-letter{
+  font-family:var(--serif);
+  font-size:3.6rem;
+  float:left;
+  line-height:.85;
+  padding:6px 10px 0 0;
+  color:var(--ocean);
+  font-weight:600;
+}
+.about-copy h3{font-size:1.3rem;margin:34px 0 12px;color:var(--ink);}
+
+/* ============================= TOURISM ============================= */
+.tourism{padding:96px 0;background:var(--bg-raised);}
+.cat-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:40px;
+}
+.cat-tab{
+  padding:11px 22px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--ink-soft);
+  border-radius:30px;
+  font-size:.86rem;
+  font-weight:500;
+  transition:background .25s ease, color .25s ease, border-color .25s ease;
+  display:flex;align-items:center;gap:8px;
+}
+.cat-tab svg{width:15px;height:15px;opacity:.75;}
+.cat-tab:hover{border-color:var(--sage-soft);color:var(--ink);}
+.cat-tab.active{background:var(--ocean);border-color:var(--ocean);color:#fff;}
+.cat-tab.active svg{opacity:1;}
+
+.dest-layout{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:34px;
+  align-items:flex-start;
+}
+.dest-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.dest-card{
+  background:var(--surface-strong);
+  border:1px solid var(--line);
+  border-radius:var(--radius-m);
+  overflow:hidden;
+  cursor:pointer;
+  transition:border-color .25s ease, transform .3s ease;
+  opacity:0;
+  animation:cardIn .5s ease forwards;
+}
+.dest-card:nth-child(1){animation-delay:.02s;}
+.dest-card:nth-child(2){animation-delay:.08s;}
+.dest-card:nth-child(3){animation-delay:.14s;}
+.dest-card:nth-child(4){animation-delay:.2s;}
+.dest-card:nth-child(5){animation-delay:.26s;}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.dest-card:hover{border-color:var(--clay-soft);transform:translateY(-3px);}
+.dest-card.active{border-color:var(--ocean);box-shadow:var(--shadow);}
+.dest-thumb{height:150px;overflow:hidden;}
+.dest-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.dest-card:hover .dest-thumb img{transform:scale(1.06);}
+.dest-body{padding:16px 18px 18px;}
+.dest-region{font-size:.68rem;color:var(--clay);font-weight:600;letter-spacing:.04em;margin-bottom:5px;}
+.dest-body h4{font-size:1.02rem;margin-bottom:6px;}
+.dest-body p{font-size:.82rem;color:var(--ink-soft);}
+
+.dest-detail{
+  position:sticky;top:110px;
+  background:var(--surface-strong);
+  border:1px solid var(--line);
+  border-radius:var(--radius-m);
+  overflow:hidden;
+}
+.dest-detail-head{padding:24px 26px 16px;}
+.dest-detail-head .dest-region{margin-bottom:8px;}
+.dest-detail-head h3{font-size:1.5rem;margin-bottom:10px;}
+.dest-detail-head p{font-size:.88rem;color:var(--ink-soft);}
+.dest-map{width:100%;height:280px;border:none;border-top:1px solid var(--line);filter:grayscale(.15) contrast(1.02);}
+html[data-theme="dark"] .dest-map{filter:invert(.9) grayscale(.35) contrast(.9) hue-rotate(180deg);}
+
+/* ============================= LIVELIHOOD ============================= */
+.livelihood{padding:96px 0;}
+.live-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.live-bars{display:flex;flex-direction:column;gap:4px;}
+.live-item{
+  border-top:1px solid var(--line);
+  padding:20px 0;
+  cursor:pointer;
+}
+.live-item:last-child{border-bottom:1px solid var(--line);}
+.live-item-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:14px;
+}
+.live-item-head h4{font-size:1.08rem;font-weight:600;font-family:var(--sans);}
+.live-pct{font-family:var(--serif);font-size:1.3rem;color:var(--ocean);}
+.live-track{
+  height:5px;
+  background:var(--line);
+  border-radius:6px;
+  margin-top:14px;
+  overflow:hidden;
+}
+.live-fill{
+  height:100%;
+  width:0%;
+  border-radius:6px;
+  background:var(--sage);
+  transition:width 1s cubic-bezier(.16,1,.3,1);
+}
+.live-desc{
+  font-size:.86rem;
+  color:var(--ink-soft);
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease, margin-top .4s ease;
+}
+.live-item.open .live-desc{max-height:120px;margin-top:14px;}
+.live-item.open .live-item-head h4{color:var(--clay);}
+
+.live-figure{
+  border-radius:var(--radius-m);
+  overflow:hidden;
+  position:relative;
+  height:520px;
+}
+.live-figure img{width:100%;height:100%;object-fit:cover;transition:opacity .5s ease;}
+.live-figure-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:22px 24px;
+  background:linear-gradient(0deg, rgba(10,12,8,0.75), transparent);
+  color:#F4EFE0;
+  font-size:.82rem;
+}
+
+/* ============================= MANDALIKA ============================= */
+.mandalika{padding:100px 0;background:var(--ink);color:var(--bg);}
+html[data-theme="dark"] .mandalika{background:#0F100D;}
+.mandalika .eyebrow{color:var(--clay-soft);}
+.mandalika .section-head{border-color:rgba(255,255,255,0.14);}
+.mandalika .section-head h2{color:var(--bg);}
+.mandalika .section-head .lede{color:rgba(244,239,224,0.6);}
+.mag-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:56px;
+}
+.mag-copy p{
+  color:rgba(244,239,224,0.72);
+  font-size:1rem;
+  margin-bottom:18px;
+  max-width:56ch;
+}
+.mag-quote{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.5rem;
+  line-height:1.4;
+  color:#F4EFE0;
+  border-left:2px solid var(--clay-soft);
+  padding-left:22px;
+  margin:32px 0;
+  max-width:34ch;
+}
+.mag-facts{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:38px;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,0.14);
+}
+.mag-fact-num{font-family:var(--serif);font-size:1.7rem;color:var(--clay-soft);}
+.mag-fact-label{font-size:.75rem;color:rgba(244,239,224,0.55);margin-top:4px;}
+
+.mag-gallery{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:180px 130px 180px;
+  gap:14px;
+}
+.mag-gallery img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-s);}
+.mg-1{grid-column:1/2;grid-row:1/3;}
+.mg-2{grid-column:2/3;grid-row:1/2;}
+.mg-3{grid-column:2/3;grid-row:2/4;}
+.mg-4{grid-column:1/2;grid-row:3/4;}
+
+/* ============================= FOOTER ============================= */
+.site-footer{
+  padding:90px 0 30px;
+  background:var(--bg-raised);
+  border-top:1px solid var(--line);
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  padding-bottom:56px;
+  border-bottom:1px solid var(--line);
+}
+.footer-title{font-size:clamp(1.8rem,3.4vw,2.5rem);max-width:11ch;}
+.footer-desc{color:var(--ink-soft);font-size:.92rem;margin-top:16px;max-width:44ch;}
+.social-list{display:flex;flex-direction:column;gap:0;}
+.social-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 4px;
+  border-top:1px solid var(--line);
+  font-size:1.05rem;
+  color:var(--ink);
+  transition:padding-left .3s ease, color .3s ease;
+}
+.social-list .social-link:last-child{border-bottom:1px solid var(--line);}
+.social-link:hover{padding-left:12px;color:var(--clay);}
+.social-link .sl-left{display:flex;align-items:center;gap:14px;}
+.social-link svg{width:19px;height:19px;flex-shrink:0;}
+.social-link .sl-arrow{
+  font-size:.85rem;
+  transform:translateX(-4px);
+  opacity:0;
+  transition:transform .3s ease, opacity .3s ease;
+}
+.social-link:hover .sl-arrow{transform:translateX(0);opacity:1;}
+.footer-bottom{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:14px;
+  padding-top:28px;
+  font-size:.78rem;
+  color:var(--ink-faint);
+}
+.back-top{
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:7px 16px;
+  font-size:.76rem;
+  transition:border-color .25s ease, color .25s ease;
+}
+.back-top:hover{border-color:var(--clay-soft);color:var(--clay);}
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width:980px){
+  .main-nav{display:none;}
+  .hamburger{display:block;}
+  .hero-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr;gap:26px;}
+  .stat-card{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:22px;}
+  .stat-card:first-child{border-top:none;padding-top:0;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-figure{position:static;}
+  .about-figure img{height:320px;}
+  .dest-layout{grid-template-columns:1fr;}
+  .dest-grid{grid-template-columns:1fr 1fr;}
+  .dest-detail{position:static;}
+  .live-layout{grid-template-columns:1fr;gap:36px;}
+  .live-figure{height:320px;order:-1;}
+  .mag-grid{grid-template-columns:1fr;}
+  .mag-gallery{grid-template-rows:150px 110px 150px;}
+  .footer-top{grid-template-columns:1fr;gap:36px;}
+}
+@media (max-width:560px){
+  .dest-grid{grid-template-columns:1fr;}
+  .mag-facts{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#beranda" class="logo">LOMBOK<span>Tanah Sasak</span></a>
+    <nav class="main-nav">
+      <a href="#beranda">Beranda</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#wisata">Wisata</a>
+      <a href="#mata-pencaharian">Kehidupan</a>
+      <a href="#mandalika">Mandalika</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Ganti mode terang/gelap">
+        <span class="knob">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34 4.93 4.93"/></svg>
+        </span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#beranda">Beranda</a>
+  <a href="#tentang">Tentang</a>
+  <a href="#wisata">Wisata</a>
+  <a href="#mata-pencaharian">Kehidupan</a>
+  <a href="#mandalika">Mandalika</a>
+</nav>
+
+<main>
+
+<!-- ============================= HERO ============================= -->
+<section class="hero" id="beranda">
+  <div class="hero-bg"></div>
+  <div class="hero-inner container hero-anim" id="heroAnim">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-tag">PULAU LOMBOK · NUSA TENGGARA BARAT</p>
+        <h1>Tanah tempat laut,<br>gunung, dan <em>doa</em><br>bertemu.</h1>
+        <p class="hero-desc">Dijuluki Pulau Seribu Masjid, Lombok menyimpan garis pantai berpasir merah muda, punggungan bukit sabana, kaki Gunung Rinjani, dan denyut keseharian suku Sasak yang masih terjaga hingga kini.</p>
+      </div>
+      <div class="hero-panel">
+        <span class="quote-mark">"</span>
+        <p>Dari abad ke-16, Lombok tumbuh sebagai persilangan budaya Sasak, Bali, dan Jawa — meninggalkan warisan masjid kuno, tenun tangan, dan tradisi bertani yang diwariskan turun-temurun.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= STATS ============================= -->
+<section class="stats">
+  <div class="container stats-row">
+    <div class="stat-card">
+      <span class="stat-num" data-target="3.85" data-suffix=" Juta">0</span>
+      <span class="stat-label">Jumlah penduduk Pulau Lombok</span>
+      <span class="stat-sub">Sensus Penduduk, Badan Pusat Statistik NTB</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" data-target="96" data-suffix="%">0</span>
+      <span class="stat-label">Penduduk beragama Islam</span>
+      <span class="stat-sub">Mayoritas suku Sasak, asal usul julukan "Seribu Masjid"</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" data-target="34" data-suffix="%">0</span>
+      <span class="stat-label">Bekerja di sektor pertanian</span>
+      <span class="stat-sub">Disusul pariwisata, perikanan, dan tenun</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= ABOUT ============================= -->
+<section class="about" id="tentang">
+  <div class="container about-grid">
+    <div class="about-figure">
+      <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=900&q=80" alt="Perbukitan hijau dan sawah berundak di Lombok">
+    </div>
+    <div class="about-copy">
+      <p>Lombok adalah pulau di gugusan Kepulauan Sunda Kecil, bertetangga dengan Bali di sebelah barat dan Sumbawa di timur. Namanya berasal dari bahasa Sasak, "lombo", yang berarti lurus — merujuk pada watak masyarakatnya yang dikenal jujur dan apa adanya.</p>
+      <p>Selama berabad-abad, pulau ini menjadi rumah bagi suku Sasak, penduduk asli yang membangun permukiman di kaki Gunung Rinjani jauh sebelum pengaruh Kerajaan Bali dan Kesultanan Selaparang membentuk wajah budayanya yang sekarang: perpaduan adat lokal dan syariat Islam yang kuat.</p>
+      <h3>Seribu Masjid, Sejuta Cerita</h3>
+      <p>Julukan "Pulau Seribu Masjid" bukan sekadar metafora. Hampir di setiap sudut desa, menara masjid berdiri berdampingan dengan rumah panggung tradisional (bale) dan lumbung padi (sambi), menandakan betapa eratnya agama, adat, dan agraria dalam keseharian masyarakat Sasak.</p>
+      <p>Di sisi lain pulau, Rinjani menjulang sebagai gunung berapi tertinggi kedua di Indonesia, menaungi lembah subur dan menjadi sumber mata air bagi ratusan desa di lerengnya — sementara garis pantai selatan menyimpan teluk-teluk tersembunyi yang kini menarik dunia lewat gelora Sirkuit Mandalika.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TOURISM ============================= -->
+<section class="tourism" id="wisata">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">JELAJAH WISATA</p>
+        <h2>Empat wajah Lombok</h2>
+      </div>
+      <p class="lede">Pilih kategori untuk melihat lima destinasi terpopuler beserta lokasi persisnya di peta.</p>
+    </div>
+
+    <div class="cat-tabs" id="catTabs"></div>
+
+    <div class="dest-layout">
+      <div class="dest-grid" id="destGrid"></div>
+      <div class="dest-detail" id="destDetail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= LIVELIHOOD ============================= -->
+<section class="livelihood" id="mata-pencaharian">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">KEHIDUPAN MASYARAKAT</p>
+        <h2>Mata pencaharian Sasak</h2>
+      </div>
+      <p class="lede">Ketuk setiap sektor untuk membaca lebih jauh perannya dalam ekonomi pulau.</p>
+    </div>
+    <div class="live-layout">
+      <div class="live-bars" id="liveBars"></div>
+      <div class="live-figure">
+        <img id="liveImg" src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=900&q=80" alt="Petani di sawah Lombok">
+        <div class="live-figure-caption" id="liveCaption">Sawah berundak di kaki Rinjani menjadi lumbung pangan utama Lombok.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MANDALIKA ============================= -->
+<section class="mandalika" id="mandalika">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">EDISI KHUSUS</p>
+        <h2>Sirkuit Mandalika</h2>
+      </div>
+      <p class="lede">Panggung balap internasional yang mengangkat teluk selatan Lombok ke peta dunia.</p>
+    </div>
+
+    <div class="mag-grid">
+      <div class="mag-copy">
+        <p>Di tepi Teluk Kuta, tanah gersang yang dulu hanya dilintasi angin laut kini menjadi rumah bagi Pertamina Mandalika International Street Circuit — lintasan sepanjang 4,3 kilometer yang menyusuri kontur alami perbukitan menuju laut.</p>
+        <blockquote class="mag-quote">"Setiap tikungan dirancang agar pembalap tetap bisa melihat birunya Samudra Hindia."</blockquote>
+        <p>Sejak menggelar seri MotoGP pertamanya, kawasan Mandalika berubah menjadi Kawasan Ekonomi Khusus Pariwisata — menggabungkan sirkuit balap, resor tepi pantai, dan desa-desa nelayan yang tetap mempertahankan ritme hidupnya yang tenang di sela hiruk-pikuk musim balap.</p>
+      </div>
+      <div class="mag-gallery">
+        <img class="mg-1" src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=700&q=80" alt="Lintasan balap menyusuri tepi pantai">
+        <img class="mg-2" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=80" alt="Kerumunan penonton balapan">
+        <img class="mg-3" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=700&q=80" alt="Motor balap di lintasan">
+        <img class="mg-4" src="https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?auto=format&fit=crop&w=700&q=80" alt="Teluk Kuta Mandalika dari udara">
+      </div>
+    </div>
+
+    <div class="mag-facts">
+      <div>
+        <div class="mag-fact-num">4,3 km</div>
+        <div class="mag-fact-label">Panjang lintasan utama</div>
+      </div>
+      <div>
+        <div class="mag-fact-num">17</div>
+        <div class="mag-fact-label">Jumlah tikungan</div>
+      </div>
+      <div>
+        <div class="mag-fact-num">2021</div>
+        <div class="mag-fact-label">Sirkuit resmi diperkenalkan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <h3 class="footer-title">Temukan Saya</h3>
+        <p class="footer-desc">Website ini dibuat sebagai eksplorasi visual tentang Pulau Lombok — kritik, kolaborasi, atau sekadar sapaan selalu terbuka lewat kanal di samping.</p>
+      </div>
+      <div class="social-list">
+        <a class="social-link" href="https://github.com/" target="_blank" rel="noopener">
+          <span class="sl-left">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.6.24 2.78.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            GitHub
+          </span>
+          <span class="sl-arrow">↗</span>
+        </a>
+        <a class="social-link" href="https://instagram.com/" target="_blank" rel="noopener">
+          <span class="sl-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </span>
+          <span class="sl-arrow">↗</span>
+        </a>
+        <a class="social-link" href="mailto:hello@example.com">
+          <span class="sl-left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
+            Email
+          </span>
+          <span class="sl-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Lombok Island — Tanah Sasak. Dibuat untuk eksplorasi budaya dan wisata.</span>
+      <a href="#beranda" class="back-top">Kembali ke atas ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- THEME TOGGLE ---------- */
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('lombok-theme');
+  if(stored){ root.setAttribute('data-theme', stored); }
+  else if(window.matchMedia('(prefers-color-scheme: dark)').matches){ root.setAttribute('data-theme','dark'); }
+
+  themeToggle.addEventListener('click', function(){
+    const cur = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('lombok-theme', next);
+  });
+
+  /* ---------- HEADER ON SCROLL ---------- */
+  const header = document.getElementById('siteHeader');
+  function onScroll(){
+    if(window.scrollY > 40){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- MOBILE NAV ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', function(){
+    const open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---------- HERO ENTRANCE ---------- */
+  window.addEventListener('load', function(){
+    document.getElementById('heroAnim').classList.add('in');
+  });
+
+  /* ---------- STAT COUNTERS ---------- */
+  const statEls = document.querySelectorAll('.stat-num');
+  const statObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const isDecimal = target % 1 !== 0;
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = target * eased;
+        el.textContent = (isDecimal ? val.toFixed(2) : Math.round(val)) + suffix;
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      statObserver.unobserve(el);
+    });
+  }, {threshold:0.6});
+  statEls.forEach(el=>statObserver.observe(el));
+
+  /* ---------- DESTINATIONS DATA ---------- */
+  const CATEGORIES = [
+    {
+      id:'pantai', label:'Laut & Pantai',
+      icon:'<path d="M2 20c2-1.2 4-1.2 6 0s4 1.2 6 0 4-1.2 6 0" stroke-linecap="round"/><path d="M2 15c2-1.2 4-1.2 6 0s4 1.2 6 0 4-1.2 6 0" stroke-linecap="round"/><circle cx="17" cy="5" r="2.4"/>',
+      items:[
+        {name:'Pantai Pink', region:'Sekaroh, Lombok Timur', lat:-8.8617, lng:116.4694, desc:'Pasir bercorak merah muda hasil serpihan karang, dengan air jernih bergradasi tosca dan bukit karang yang mengapitnya.', img:'https://images.unsplash.com/photo-1591017403286-fd8493524e1e?auto=format&fit=crop&w=700&q=80'},
+        {name:'Tanjung Aan', region:'Pujut, Lombok Tengah', lat:-8.8953, lng:116.2962, desc:'Teluk berbentuk tapal kuda dengan dua jenis pasir: halus seperti tepung dan butiran kasar seperti merica.', img:'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=700&q=80'},
+        {name:'Gili Trawangan', region:'Pemenang, Lombok Utara', lat:-8.3495, lng:116.0407, desc:'Pulau kecil tanpa kendaraan bermotor, dikenal dengan terumbu karang penyu dan matahari terbenam dari atas bukit.', img:'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=700&q=80'},
+        {name:'Pantai Selong Belanak', region:'Praya Barat, Lombok Tengah', lat:-8.8942, lng:116.1975, desc:'Teluk landai berpasir putih yang tenang, favorit peselancar pemula dan tempat terbaik menonton senja.', img:'https://images.unsplash.com/photo-1499591934245-40b55745b905?auto=format&fit=crop&w=700&q=80'},
+        {name:'Pantai Mawun', region:'Pujut, Lombok Tengah', lat:-8.8944, lng:116.2244, desc:'Teluk tertutup diapit dua bukit hijau, ombaknya tenang di tengah dan berair jernih kehijauan.', img:'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=700&q=80'}
+      ]
+    },
+    {
+      id:'bukit', label:'Bukit',
+      icon:'<path d="M3 18l5-8 4 5 3-4 6 7z"/>',
+      items:[
+        {name:'Bukit Merese', region:'Pujut, Lombok Tengah', lat:-8.8977, lng:116.2977, desc:'Padang sabana menghadap laut lepas, titik terbaik memotret Tanjung Aan dari ketinggian saat senja.', img:'https://images.unsplash.com/photo-1500932334442-8761ee4810a7?auto=format&fit=crop&w=700&q=80'},
+        {name:'Bukit Pergasingan', region:'Sembalun, Lombok Timur', lat:-8.3630, lng:116.5457, desc:'Punggungan sabana di kaki Rinjani, jalur pendakian ringan dengan pemandangan lembah Sembalun yang luas.', img:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=700&q=80'},
+        {name:'Bukit Malimbu', region:'Pemenang, Lombok Utara', lat:-8.4198, lng:116.0577, desc:'Tepian jalan berkelok menghadap tiga Gili sekaligus, dikenal sebagai salah satu titik senja terindah pulau.', img:'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=80'},
+        {name:'Bukit Seger', region:'Kuta, Lombok Tengah', lat:-8.8656, lng:116.4747, desc:'Bukit tandus bertekstur unik bersebelahan dengan Pantai Seger, ramai saat tradisi Bau Nyale berlangsung.', img:'https://images.unsplash.com/photo-1470114716159-e389f8712fda?auto=format&fit=crop&w=700&q=80'},
+        {name:'Bukit Selong', region:'Sembalun, Lombok Timur', lat:-8.3665, lng:116.5433, desc:'Titik pandang ikonik dengan petak-petak sawah Sembalun tersusun rapi di bawahnya, latar Rinjani menjulang.', img:'https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?auto=format&fit=crop&w=700&q=80'}
+      ]
+    },
+    {
+      id:'gunung', label:'Gunung',
+      icon:'<path d="M4 20L11 6l3 5.5L17 8l4 12z"/>',
+      items:[
+        {name:'Puncak Rinjani', region:'Taman Nasional Gunung Rinjani', lat:-8.4109, lng:116.4573, desc:'Gunung berapi tertinggi kedua di Indonesia, 3.726 mdpl, dipercaya masyarakat Sasak sebagai tempat suci.', img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=700&q=80'},
+        {name:'Danau Segara Anak', region:'Kaldera Rinjani', lat:-8.4010, lng:116.4420, desc:'Danau kawah biru kehijauan di ketinggian 2.000 mdpl, titik istirahat utama pendaki sebelum summit attack.', img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80'},
+        {name:'Plawangan Senaru', region:'Jalur Senaru, Lombok Utara', lat:-8.3980, lng:116.4350, desc:'Punggungan tepi kaldera dengan panorama danau di satu sisi dan puncak Rinjani di sisi lain.', img:'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=700&q=80'},
+        {name:'Pelawangan Sembalun', region:'Jalur Sembalun, Lombok Timur', lat:-8.3850, lng:116.4780, desc:'Titik awal pendakian menuju puncak, melintasi padang savana kering yang membentang luas.', img:'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=700&q=80'},
+        {name:'Mata Air Panas Torean', region:'Torean, Lombok Utara', lat:-8.3930, lng:116.4630, desc:'Sumber air panas alami di tepi sungai kaldera, tempat pendaki melepas lelah setelah turun gunung.', img:'https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=700&q=80'}
+      ]
+    },
+    {
+      id:'masjid', label:'Masjid',
+      icon:'<path d="M4 21V11l8-6 8 6v10"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="4" r="1"/>',
+      items:[
+        {name:'Masjid Hubbul Wathan', region:'Islamic Center, Mataram', lat:-8.5833, lng:116.1136, desc:'Masjid raya termegah di NTB dengan menara pandang 99 meter, simbol julukan Pulau Seribu Masjid masa kini.', img:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?auto=format&fit=crop&w=700&q=80'},
+        {name:'Masjid Kuno Bayan Beleq', region:'Bayan, Lombok Utara', lat:-8.2597, lng:116.4126, desc:'Masjid tertua di Lombok, berdinding bambu dan beratap alang-alang, peninggalan penyebaran Islam abad ke-16.', img:'https://images.unsplash.com/photo-1591825381889-9d2bb0f13c8c?auto=format&fit=crop&w=700&q=80'},
+        {name:'Masjid Agung At-Taqwa', region:'Mataram', lat:-8.5822, lng:116.1067, desc:'Masjid agung kota Mataram yang menjadi pusat kegiatan keagamaan dan sosial masyarakat ibu kota provinsi.', img:'https://images.unsplash.com/photo-1519669417670-68775a50919e?auto=format&fit=crop&w=700&q=80'},
+        {name:'Masjid Nurul Bilad', region:'Mandalika, Lombok Tengah', lat:-8.8977, lng:116.2949, desc:'Masjid terapung modern di tepi Teluk Mandalika, berpadu dengan lanskap sirkuit dan resor pesisir.', img:'https://images.unsplash.com/photo-1591020332948-38e7b3e63940?auto=format&fit=crop&w=700&q=80'},
+        {name:'Masjid Kuno Rembitan', region:'Sade, Lombok Tengah', lat:-8.8834, lng:116.2751, desc:'Masjid kuno di kompleks desa adat Sade, dibangun tanpa paku, mencerminkan arsitektur Sasak yang autentik.', img:'https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=700&q=80'}
+      ]
+    }
+  ];
+
+  const catTabs = document.getElementById('catTabs');
+  const destGrid = document.getElementById('destGrid');
+  const destDetail = document.getElementById('destDetail');
+
+  CATEGORIES.forEach((cat, idx)=>{
+    const btn = document.createElement('button');
+    btn.className = 'cat-tab' + (idx===0 ? ' active' : '');
+    btn.dataset.cat = cat.id;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">'+cat.icon+'</svg>' + cat.label;
+    btn.addEventListener('click', ()=> renderCategory(cat.id));
+    catTabs.appendChild(btn);
+  });
+
+  function renderCategory(catId){
+    const cat = CATEGORIES.find(c=>c.id===catId);
+    catTabs.querySelectorAll('.cat-tab').forEach(b=>{
+      b.classList.toggle('active', b.dataset.cat === catId);
+    });
+    destGrid.innerHTML = '';
+    cat.items.forEach((item, i)=>{
+      const card = document.createElement('div');
+      card.className = 'dest-card' + (i===0 ? ' active' : '');
+      card.innerHTML =
+        '<div class="dest-thumb"><img src="'+item.img+'" alt="'+item.name+'" loading="lazy"></div>'+
+        '<div class="dest-body">'+
+          '<p class="dest-region">'+item.region+'</p>'+
+          '<h4>'+item.name+'</h4>'+
+          '<p>'+item.desc+'</p>'+
+        '</div>';
+      card.addEventListener('click', ()=>{
+        destGrid.querySelectorAll('.dest-card').forEach(c=>c.classList.remove('active'));
+        card.classList.add('active');
+        renderDetail(item);
+      });
+      destGrid.appendChild(card);
+    });
+    renderDetail(cat.items[0]);
+  }
+
+  function renderDetail(item){
+    destDetail.innerHTML =
+      '<div class="dest-detail-head">'+
+        '<p class="dest-region">'+item.region+'</p>'+
+        '<h3>'+item.name+'</h3>'+
+        '<p>'+item.desc+'</p>'+
+      '</div>'+
+      '<iframe class="dest-map" loading="lazy" src="https://www.google.com/maps?q='+item.lat+','+item.lng+'&hl=id&z=13&output=embed" title="Peta lokasi '+item.name+'"></iframe>';
+  }
+
+  renderCategory('pantai');
+
+  /* ---------- LIVELIHOOD ---------- */
+  const LIVELIHOOD = [
+    {name:'Pertanian', pct:34, img:'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=900&q=80', caption:'Sawah berundak di kaki Rinjani menjadi lumbung pangan utama Lombok.', desc:'Padi, tembakau, dan kopi robusta ditanam di lereng subur bekas letusan Rinjani, menopang sebagian besar rumah tangga di pedesaan.'},
+    {name:'Nelayan', pct:18, img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80', caption:'Perahu cadik bersandar di pesisir selatan Lombok saat senja.', desc:'Perikanan tangkap dan budidaya rumput laut menjadi tulang punggung desa-desa pesisir seperti Ekas dan Gerupuk.'},
+    {name:'Pengrajin Tenun', pct:12, img:'https://images.unsplash.com/photo-1528812969535-4bcefbe3dd94?auto=format&fit=crop&w=900&q=80', caption:'Tenun songket dikerjakan dengan alat tenun gedogan di Sukarara.', desc:'Desa Sukarara dan Pringgasela menjaga tradisi tenun songket yang diwariskan turun-temurun dari ibu ke anak perempuan.'},
+    {name:'Jasa Pariwisata', pct:24, img:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=900&q=80', caption:'Pemandu wisata menemani pengunjung menyusuri jalur Rinjani.', desc:'Pemandu trekking, pengelola homestay, hingga operator selam tumbuh seiring meningkatnya kunjungan ke Gili dan Mandalika.'},
+    {name:'Sektor Lainnya', pct:12, img:'https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=900&q=80', caption:'Pasar tradisional tetap menjadi pusat aktivitas ekonomi warga.', desc:'Perdagangan, kerajinan gerabah Banyumulek, dan usaha kecil menengah melengkapi keragaman ekonomi masyarakat Sasak.'}
+  ];
+
+  const liveBars = document.getElementById('liveBars');
+  const liveImg = document.getElementById('liveImg');
+  const liveCaption = document.getElementById('liveCaption');
+
+  LIVELIHOOD.forEach((item, i)=>{
+    const row = document.createElement('div');
+    row.className = 'live-item' + (i===0 ? ' open' : '');
+    row.innerHTML =
+      '<div class="live-item-head"><h4>'+item.name+'</h4><span class="live-pct">'+item.pct+'%</span></div>'+
+      '<div class="live-track"><div class="live-fill"></div></div>'+
+      '<p class="live-desc">'+item.desc+'</p>';
+    row.addEventListener('click', ()=>{
+      const alreadyOpen = row.classList.contains('open');
+      liveBars.querySelectorAll('.live-item').forEach(r=>r.classList.remove('open'));
+      if(!alreadyOpen){ row.classList.add('open'); }
+      liveImg.style.opacity = 0;
+      setTimeout(()=>{
+        liveImg.src = item.img;
+        liveCaption.textContent = item.caption;
+        liveImg.style.opacity = 1;
+      }, 200);
+    });
+    liveBars.appendChild(row);
+  });
+
+  const liveObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      liveBars.querySelectorAll('.live-item').forEach((row, i)=>{
+        const fill = row.querySelector('.live-fill');
+        setTimeout(()=>{ fill.style.width = LIVELIHOOD[i].pct + '%'; }, i*80);
+      });
+      liveObserver.disconnect();
+    });
+  }, {threshold:0.4});
+  liveObserver.observe(liveBars);
+
+  /* ---------- FOOTER YEAR ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+})();
+</script>
+</body>
+</html>
